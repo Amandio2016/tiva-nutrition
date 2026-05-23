@@ -122,13 +122,14 @@ export async function POST(request: Request) {
       max_tokens: 8000,
       system: SYSTEM_PROMPT,
       messages: [
-        { role: "user",      content: userPrompt },
-        { role: "assistant", content: "{" }, // prefill → guaranteed JSON response
+        { role: "user", content: userPrompt },
       ],
     });
 
-    const rawText = "{" + (message.content[0] as { type: "text"; text: string }).text;
-    const plan = JSON.parse(rawText);
+    const rawText = (message.content[0] as { type: "text"; text: string }).text;
+    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error("Resposta inválida da IA");
+    const plan = JSON.parse(jsonMatch[0]);
 
     // ── Persist to Supabase ─────────────────────────────────────────────────
 
