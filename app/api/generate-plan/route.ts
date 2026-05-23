@@ -250,13 +250,14 @@ Devolve EXACTAMENTE este JSON (texto em Português de Moçambique):
   "coach_message": "Mensagem motivadora e personalizada para ${p.name} do teu coach IA — menciona o objectivo específico e encoraja a acção imediata"
 }
 
-REGRAS OBRIGATÓRIAS:
-- weekly_menu: exactamente 5 refeições × 7 dias = 35 entradas
-- training_plan: exactamente ${p.training_days} dias (escolhe os melhores dias da semana)
-- avoid_list: mínimo 2 itens por categoria (alimento, habito, comportamento)
-- supplements: mínimo 2 essencial, 2 recomendado, 1 opcional
-- daily_routine.schedule: 8-12 entradas de 06:00 até ao sono
+REGRAS OBRIGATÓRIAS (CRÍTICO — respeita os limites de tamanho):
+- weekly_menu: exactamente 4 refeições × 7 dias = 28 entradas
+- training_plan: exactamente ${p.training_days} dias, máximo 3 exercícios por dia
+- avoid_list: exactamente 2 alimento + 1 habito + 1 comportamento = 4 itens
+- supplements: exactamente 2 essencial + 1 recomendado + 1 opcional = 4 itens
+- daily_routine.schedule: exactamente 6 entradas de 06:00 até ao sono
+- items de cada refeição: máximo 3 items curtos (menos de 8 palavras cada)
+- tip de cada item: máximo 10 palavras
 - Usa APENAS: ${foods}
-- weekly_calories deve ser ${calc.targetKcal} e daily_protein_g deve ser ${calc.targetProtein}
-- Cada refeição deve atingir a proteína diária quando somada (${calc.targetProtein}g total)`;
+- weekly_calories deve ser ${calc.targetKcal} e daily_protein_g deve ser ${calc.targetProtein}`;
 }
