@@ -26,12 +26,22 @@ export async function GET(request: Request) {
     return NextResponse.redirect(new URL("/login?error=no_user", origin));
   }
 
-  // Check if onboarding was already completed
+  // Garante que existe um perfil (caso o trigger tenha falhado)
   const { data: profile } = await supabase
     .from("profiles")
     .select("onboarding_completed")
     .eq("id", user.id)
-    .single();
+    .maybeSingle();
+
+  if (!profile) {
+    await supabase.from("profiles").upsert({
+      id: user.id,
+      email: user.email,
+      name: user.user_metadata?.full_name ?? "Utilizador",
+      avatar_url: user.user_metadata?.avatar_url ?? "",
+      onboarding_completed: false,
+    }, { onConflict: "id" });
+  }
 
   const destination = profile?.onboarding_completed ? "/dashboard" : "/onboarding";
   return NextResponse.redirect(new URL(destination, origin));
