@@ -5,17 +5,23 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function handleGoogleLogin() {
     setLoading(true);
+    setError(null);
     const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
+    const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
         redirectTo: window.location.origin + "/auth/callback",
       },
     });
-    // Loading stays true — page will redirect away
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+    }
+    // Se não houver erro, a página redireciona para o Google
   }
 
   return (
@@ -84,6 +90,13 @@ export default function LoginPage() {
             </li>
           ))}
         </ul>
+
+        {/* ── Erro ── */}
+        {error && (
+          <p className="mb-4 rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-center text-sm text-red-400">
+            {error}
+          </p>
+        )}
 
         {/* ── Google button ── */}
         <button
