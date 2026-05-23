@@ -87,32 +87,37 @@ export default function DashboardPage() {
   // Fetch profile + active plan
   useEffect(() => {
     (async () => {
-      const supabase = createClient();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) { router.push("/login"); return; }
+      try {
+        const supabase = createClient();
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) { router.push("/login"); return; }
 
-      const [{ data: prof }, { data: planRow }] = await Promise.all([
-        supabase.from("profiles").select("*").eq("id", user.id).single(),
-        supabase
-          .from("generated_plans")
-          .select("plan_data")
-          .eq("user_id", user.id)
-          .eq("is_active", true)
-          .order("created_at", { ascending: false })
-          .limit(1)
-          .maybeSingle(),
-      ]);
+        const [profileRes, planRes] = await Promise.all([
+          supabase.from("profiles").select("*").eq("id", user.id).single(),
+          supabase
+            .from("generated_plans")
+            .select("plan_data")
+            .eq("user_id", user.id)
+            .eq("is_active", true)
+            .order("created_at", { ascending: false })
+            .limit(1)
+            .maybeSingle(),
+        ]);
 
-      if (prof) setProfile(prof as Profile);
-      if (planRow?.plan_data) {
-        const fetched = planRow.plan_data as GeneratedPlan;
-        cachePlan(fetched);
-        setPlan(fetched);
-      } else {
-        const cached = getCachedPlan();
-        if (cached) setPlan(cached);
+        if (profileRes.data) setProfile(profileRes.data as Profile);
+        if (planRes.data?.plan_data) {
+          const fetched = planRes.data.plan_data as GeneratedPlan;
+          cachePlan(fetched);
+          setPlan(fetched);
+        } else {
+          const cached = getCachedPlan();
+          if (cached) setPlan(cached);
+        }
+      } catch (e) {
+        console.error("[dashboard]", e);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     })();
   }, [router]);
 
