@@ -205,30 +205,21 @@ Devolve EXACTAMENTE este JSON (texto em Português de Moçambique):
   "daily_protein_g": ${calc.targetProtein},
   "weekly_menu": {
     "Segunda": [
-      { "name": "Matabicho", "time": "07:00", "emoji": "🌅",
-        "items": ["item 1 com quantidade", "item 2", "item 3"],
-        "tip": "dica prática" },
-      { "name": "Lanche manhã", "time": "10:00", "emoji": "🍌",
-        "items": ["..."], "tip": "..." },
-      { "name": "Almoço", "time": "13:00", "emoji": "🍽️",
-        "items": ["..."], "tip": "..." },
-      { "name": "Lanche tarde", "time": "16:30", "emoji": "🥜",
-        "items": ["..."], "tip": "..." },
-      { "name": "Jantar", "time": "20:00", "emoji": "🌙",
-        "items": ["..."], "tip": "..." }
+      { "name": "Matabicho", "time": "07:00", "emoji": "🌅", "items": ["item 1", "item 2", "item 3"], "tip": "dica" },
+      { "name": "Almoço",    "time": "13:00", "emoji": "🍽️", "items": ["item 1", "item 2", "item 3"], "tip": "dica" },
+      { "name": "Lanche",    "time": "16:30", "emoji": "🥜", "items": ["item 1", "item 2"],            "tip": "dica" },
+      { "name": "Jantar",    "time": "20:00", "emoji": "🌙", "items": ["item 1", "item 2", "item 3"], "tip": "dica" }
     ],
-    "Terça": [ ...5 refeições... ],
-    "Quarta": [ ...5 refeições... ],
-    "Quinta": [ ...5 refeições... ],
-    "Sexta":  [ ...5 refeições... ],
-    "Sábado": [ ...5 refeições... ],
-    "Domingo":[ ...5 refeições... ]
+    "Terça":   [ ...4 refeições com o mesmo formato... ],
+    "Quarta":  [ ...4 refeições... ],
+    "Quinta":  [ ...4 refeições... ],
+    "Sexta":   [ ...4 refeições... ],
+    "Sábado":  [ ...4 refeições... ],
+    "Domingo": [ ...4 refeições... ]
   },
   "supplements": [
-    { "name": "Creatina", "dose": "5g/dia", "timing": "Após treino no somo",
-      "reason": "Aumenta força e recuperação muscular", "emoji": "💊", "priority": "essencial" },
+    { "name": "Creatina", "dose": "5g/dia", "timing": "Após treino", "reason": "Aumenta força", "emoji": "💊", "priority": "essencial" },
     { "name": "...", "dose": "...", "timing": "...", "reason": "...", "emoji": "💊", "priority": "essencial" },
-    { "name": "...", "dose": "...", "timing": "...", "reason": "...", "emoji": "🌿", "priority": "recomendado" },
     { "name": "...", "dose": "...", "timing": "...", "reason": "...", "emoji": "🌿", "priority": "recomendado" },
     { "name": "...", "dose": "...", "timing": "...", "reason": "...", "emoji": "💊", "priority": "opcional" }
   ],
@@ -236,23 +227,22 @@ Devolve EXACTAMENTE este JSON (texto em Português de Moçambique):
     "wake_time": "06:00",
     "sleep_time": "22:30",
     "schedule": [
-      { "time": "06:00", "activity": "Acordar e hidratar", "emoji": "⏰", "tip": "Bebe 500ml de água logo ao acordar" },
-      ...mais 7-11 entradas cobrindo o dia inteiro...
+      { "time": "06:00", "activity": "Acordar e hidratar", "emoji": "⏰", "tip": "Bebe 500ml de água" },
+      ...mais 5-7 entradas cobrindo o dia...
     ]
   },
   "avoid_list": [
     { "category": "alimento",      "item": "...", "reason": "...", "emoji": "🍔" },
     { "category": "alimento",      "item": "...", "reason": "...", "emoji": "🥤" },
     { "category": "habito",        "item": "...", "reason": "...", "emoji": "📵" },
-    { "category": "habito",        "item": "...", "reason": "...", "emoji": "🚫" },
-    { "category": "comportamento", "item": "...", "reason": "...", "emoji": "🧠" },
-    { "category": "comportamento", "item": "...", "reason": "...", "emoji": "😴" }
+    { "category": "comportamento", "item": "...", "reason": "...", "emoji": "🧠" }
   ],
   "training_plan": [
     { "day": "Segunda", "focus": "Peito e Tríceps",
       "exercises": [
-        { "name": "Flexões", "sets": 4, "reps": "10-15", "rest": "60s", "tip": "dica de forma" },
-        ...3-5 exercícios por sessão...
+        { "name": "Flexões", "sets": 4, "reps": "10-15", "rest": "60s", "tip": "dica" },
+        { "name": "...", "sets": 3, "reps": "...", "rest": "...", "tip": "..." },
+        { "name": "...", "sets": 3, "reps": "...", "rest": "...", "tip": "..." }
       ]
     },
     ...total de ${p.training_days} dias de treino...
