@@ -68,7 +68,7 @@ Nenhum markdown. Nenhum bloco de código. Apenas o objecto JSON puro.`;
 
 // ── Route handler ─────────────────────────────────────────────────────────────
 
-export async function POST() {
+export async function POST(request: Request) {
   const supabase = await createClient();
 
   const {
@@ -82,13 +82,25 @@ export async function POST() {
     );
   }
 
-  const { data: profile, error: profileErr } = await supabase
+  // Try DB first; fall back to request body to handle read-replica lag right after onboarding upsert
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let profile: Record<string, any> | null = null;
+  const { data: dbProfile } = await supabase
     .from("profiles")
     .select("*")
     .eq("id", user.id)
     .single();
 
-  if (profileErr || !profile) {
+  if (dbProfile) {
+    profile = dbProfile;
+  } else {
+    const body = await request.json().catch(() => ({}));
+    if (body.name && body.goal) {
+      profile = { id: user.id, email: user.email ?? "", avatar_url: "", ...body };
+    }
+  }
+
+  if (!profile) {
     return NextResponse.json(
       { success: false, error: "Perfil não encontrado" },
       { status: 404 }

@@ -140,8 +140,8 @@ export default function DashboardPage() {
 
   // ── Render gates ──────────────────────────────────────────────────────────
   if (!mounted || loading) return <LoadingScreen />;
-  if (!profile)            return null;
-  if (!plan)               return <NoPlanScreen name={profile.name} />;
+  if (!profile)            return <LoadingScreen />;
+  if (!plan)               return <NoPlanScreen name={profile.name ?? "Atleta"} />;
 
   // ── Derived state ─────────────────────────────────────────────────────────
   const safeNow      = now ?? new Date();
@@ -208,7 +208,7 @@ export default function DashboardPage() {
           <section className="flex items-center justify-between gap-4">
             <div className="min-w-0">
               <h1 className="text-[22px] font-black leading-snug text-white">
-                {greet(safeNow.getHours())}, {profile.name.split(" ")[0]}! 💪
+                {greet(safeNow.getHours())}, {(profile.name ?? "Atleta").split(" ")[0]}! 💪
               </h1>
               <p className="mt-0.5 truncate text-xs text-white/35">
                 Plano: {GOAL_LABEL[profile.goal] ?? profile.goal}

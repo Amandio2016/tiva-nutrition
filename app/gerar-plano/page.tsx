@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { GeneratedPlan, MealItem, Supplement, TrainingDay, AvoidItem } from "@/types";
+import { cachePlan } from "@/lib/planCache";
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
@@ -102,8 +103,9 @@ export default function GerarPlanoPage() {
   }, [phase]);
 
   async function savePlan() {
-    if (saving) return;
+    if (saving || !plan) return;
     setSaving(true);
+    cachePlan(plan);
     router.push("/dashboard");
   }
 
