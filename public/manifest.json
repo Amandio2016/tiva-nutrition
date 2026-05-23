@@ -1,0 +1,45 @@
+{
+  "name": "Tiva Nutrition",
+  "short_name": "Tiva",
+  "description": "Coach de nutrição e performance para atletas moçambicanos",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#F97316",
+  "background_color": "#0F0A06",
+  "lang": "pt",
+  "categories": ["health", "fitness", "food"],
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Hoje",
+      "url": "/dashboard",
+      "description": "Ver as refeições do dia"
+    },
+    {
+      "name": "Suplementos",
+      "url": "/suplementos",
+      "description": "Marcar suplementos tomados"
+    }
+  ]
+}

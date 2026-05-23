@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Background with rounded corners (maskable safe zone: inner 80% = 204px padding each side from 512) -->
+  <rect width="512" height="512" rx="96" fill="#F97316"/>
+
+  <!-- Dumbbell icon — plates, collars, bar -->
+  <!-- Left plate -->
+  <rect x="32" y="174" width="72" height="164" rx="14" fill="white"/>
+  <!-- Left collar -->
+  <rect x="104" y="212" width="38" height="88" rx="7" fill="rgba(255,255,255,0.78)"/>
+  <!-- Bar -->
+  <rect x="142" y="238" width="228" height="36" rx="6" fill="white"/>
+  <!-- Right collar -->
+  <rect x="370" y="212" width="38" height="88" rx="7" fill="rgba(255,255,255,0.78)"/>
+  <!-- Right plate -->
+  <rect x="408" y="174" width="72" height="164" rx="14" fill="white"/>
+
+  <!-- Small "N" lettermark below bar for branding -->
+  <text
+    x="256"
+    y="368"
+    font-family="system-ui, sans-serif"
+    font-size="52"
+    font-weight="800"
+    fill="white"
+    text-anchor="middle"
+    opacity="0.55"
+    letter-spacing="2"
+  >NUTRITION</text>
+</svg>
